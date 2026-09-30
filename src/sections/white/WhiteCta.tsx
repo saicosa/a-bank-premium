@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { brand, legal, navItems } from "@/data/content";
+import { withBase } from "@/lib/basePath";
 
 export function WhitePresence() {
   return (
@@ -9,7 +10,7 @@ export function WhitePresence() {
         <div className="w-round grid grid-cols-1 lg:grid-cols-2">
           <div className="relative min-h-[16rem] sm:min-h-[20rem] lg:min-h-[26rem]">
             <Image
-              src="/images/crypto-desk.jpg"
+              src={withBase("/images/crypto-desk.jpg")}
               alt="Карта и активы в кошельке A-bank"
               fill
               unoptimized
