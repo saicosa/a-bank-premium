@@ -42,7 +42,7 @@ export function Contour() {
       <div className="container-site section-pad">
         <SectionIndex index="03" label="Продукты" className="mb-5 sm:mb-6" />
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-10">
-          <div className="lg:col-span-5">
+          <div className="lg:col-span-5 lg:sticky lg:top-[calc(var(--nav-h)+1.5rem)] lg:self-start">
             <h2
               id="contour-title"
               className="font-display text-[clamp(1.85rem,7vw,4.5rem)] leading-[1.08]"

@@ -167,6 +167,32 @@ main {
   outline-offset: 3px;
 }
 
+.flow-step {
+  background-color: transparent;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.flow-step:hover {
+  background-color: color-mix(in srgb, var(--gold) 10%, transparent);
+}
+
+.flow-step:active {
+  background-color: color-mix(in srgb, var(--gold) 28%, transparent) !important;
+}
+
+.flow-step.is-active {
+  background-color: color-mix(in srgb, var(--gold) 18%, transparent);
+  border-left-color: var(--gold);
+  color: var(--ink);
+}
+
+.flow-step.is-active:active {
+  background-color: color-mix(in srgb, var(--gold) 32%, transparent) !important;
+}
+
 html.has-custom-cursor,
 html.has-custom-cursor * {
   cursor: none !important;

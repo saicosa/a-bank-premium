@@ -2,16 +2,20 @@
 
 import { useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
-import { gsap, registerGsap } from "@/lib/gsap";
+import { gsap, registerGsap, ScrollTrigger } from "@/lib/gsap";
 import { flowSteps } from "@/data/content";
 import { SectionIndex } from "@/components/ui/SectionIndex";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
+import { useCursor } from "@/components/providers/CursorProvider";
 
 export function Flow() {
   const root = useRef<HTMLElement>(null);
+  const pinTrigger = useRef<ScrollTrigger | null>(null);
+  const clickLockUntil = useRef(0);
   const [active, setActive] = useState(0);
   const reduced = useReducedMotion();
+  const { setCursor } = useCursor();
   const { matches: isMobile, ready: mqReady } = useMediaQuery(
     "(max-width: 767px)",
   );
@@ -33,6 +37,7 @@ export function Flow() {
           anticipatePin: 1,
           invalidateOnRefresh: true,
           onUpdate: (self) => {
+            if (performance.now() < clickLockUntil.current) return;
             const idx = Math.min(
               steps - 1,
               Math.floor(self.progress * steps),
@@ -42,13 +47,28 @@ export function Flow() {
         },
       });
 
+      pinTrigger.current = st.scrollTrigger ?? null;
+
       return () => {
+        pinTrigger.current = null;
         st.scrollTrigger?.kill();
         st.kill();
       };
     },
     { scope: root, dependencies: [useScrollStory] },
   );
+
+  const goToStep = (i: number) => {
+    clickLockUntil.current = performance.now() + 900;
+    setActive(i);
+    const trigger = pinTrigger.current;
+    if (!trigger) return;
+    const steps = flowSteps.length;
+    const progress = (i + 0.5) / steps;
+    const y =
+      trigger.start + (trigger.end - trigger.start) * Math.min(0.999, progress);
+    window.scrollTo({ top: y, behavior: "smooth" });
+  };
 
   return (
     <section
@@ -84,15 +104,17 @@ export function Flow() {
                       type="button"
                       role="option"
                       aria-selected={isActive}
-                      className={`focus-ring flex w-full items-baseline gap-4 border-l-2 py-3 pl-4 text-left transition-colors ${
+                      className={`flow-step focus-ring group flex w-full items-baseline gap-4 border-l-2 py-3.5 pl-4 text-left ${
                         isActive
-                          ? "border-gold text-ink"
+                          ? "is-active border-gold"
                           : "border-line text-mute"
                       }`}
-                      onClick={() => setActive(i)}
+                      onClick={() => goToStep(i)}
+                      onMouseEnter={() => setCursor("hover")}
+                      onMouseLeave={() => setCursor("default")}
                     >
                       <span
-                        className={`meta shrink-0 ${isActive ? "text-gold" : ""}`}
+                        className={`meta shrink-0 ${isActive ? "text-gold" : "text-mute group-hover:text-gold"}`}
                       >
                         {step.index}
                       </span>
