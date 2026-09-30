@@ -39,7 +39,7 @@ export function Threshold() {
             <MagneticButton
               href={brand.walletUrl}
               external
-              className="w-full self-start !bg-[var(--gold)] !text-black hover:!bg-black hover:!text-[var(--gold)] sm:w-auto"
+              className="w-full self-start !bg-[var(--gold)] !text-black hover:!bg-black hover:!text-white sm:w-auto"
             >
               Войти в кошелёк
               <ArrowUpRight className="h-4 w-4" aria-hidden />

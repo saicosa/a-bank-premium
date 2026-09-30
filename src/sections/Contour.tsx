@@ -70,7 +70,7 @@ export function Contour() {
                   </span>
                 </div>
                 <p className="meta mt-3">{product.subtitle}</p>
-                <h3 className="mt-1 font-display text-[clamp(1.45rem,4vw,2.4rem)] leading-[1.1]">
+                <h3 className="mt-1 font-display text-[clamp(1.45rem,4vw,2.4rem)] leading-[1.1] text-white">
                   {product.title}
                 </h3>
                 <p className="mt-3 max-w-xl text-sm leading-relaxed text-mute sm:text-[0.95rem]">

@@ -55,7 +55,7 @@ export function WhiteProducts() {
                       <p className={`text-sm ${tone.muted}`}>
                         {product.subtitle}
                       </p>
-                      <h3 className="font-display mt-1 text-[clamp(1.55rem,3.2vw,2.25rem)] leading-[1.1]">
+                      <h3 className="font-display mt-1 text-[clamp(1.55rem,3.2vw,2.25rem)] leading-[1.1] text-white">
                         {product.title}
                       </h3>
                     </div>
