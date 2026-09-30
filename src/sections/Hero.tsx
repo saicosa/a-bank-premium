@@ -8,6 +8,7 @@ import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { gsap, registerGsap } from "@/lib/gsap";
 import { brand } from "@/data/content";
 import { heroSlides as slides } from "@/data/heroSlides";
+import { withBase } from "@/lib/basePath";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useCursor } from "@/components/providers/CursorProvider";
@@ -192,7 +193,7 @@ export function Hero({ ready }: Props) {
             >
               <Image
                 className="object-cover object-center"
-                src={current.src}
+                src={withBase(current.src)}
                 alt={current.label}
                 fill
                 sizes="(max-width: 1024px) 100vw, 66vw"

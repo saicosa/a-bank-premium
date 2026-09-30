@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { brand } from "@/data/content";
 import { heroSlides as slides } from "@/data/heroSlides";
+import { withBase } from "@/lib/basePath";
 
 export function WhiteHero() {
   const [index, setIndex] = useState(0);
@@ -99,7 +100,7 @@ export function WhiteHero() {
                 />
                 <div className="absolute inset-0 overflow-hidden rounded-[1.5rem] bg-[#0c0c0e] sm:rounded-[1.75rem]">
                   <Image
-                    src={current.src}
+                    src={withBase(current.src)}
                     alt={current.label}
                     fill
                     priority={index === 0}

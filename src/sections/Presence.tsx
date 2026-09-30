@@ -7,6 +7,7 @@ import { gsap, registerGsap } from "@/lib/gsap";
 import { SectionIndex } from "@/components/ui/SectionIndex";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useCursor } from "@/components/providers/CursorProvider";
+import { withBase } from "@/lib/basePath";
 
 export function Presence() {
   const root = useRef<HTMLElement>(null);
@@ -65,7 +66,7 @@ export function Presence() {
               onMouseLeave={() => setCursor("default")}
             >
               <Image
-                src="/images/crypto-desk.jpg"
+                src={withBase("/images/crypto-desk.jpg")}
                 alt="Карта, курс и активы в кошельке A-bank"
                 fill
                 sizes="(max-width: 1024px) 100vw, 58vw"
